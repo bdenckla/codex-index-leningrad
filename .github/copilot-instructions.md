@@ -47,7 +47,6 @@ body, etc.), write it to a file in `.novc/` and reference the file.
 - **Never auto-commit.** Only commit when the user explicitly asks.
 - **Never amend commits.** Always make new commits.
 - **Before discarding work** (`git reset`, `git checkout -- .`, etc.): run `git status` and `git diff --stat` first. Alert the user if there are uncommitted changes beyond the current experiment.
-- **Don't re-assert the repo directory.** Run `git` directly without `cd` or `git -C <this-repo>`. For a sibling repo, use `git -C <path>`.
 - **Don't close issues prematurely.** Never close a GitHub issue until work is both committed **and** pushed.
 
 ## Authorship Marking
