@@ -25,8 +25,9 @@ higher-level tools, while this script is a standalone CLI entry point.
 import io
 import sys
 import unicodedata
-import py.my_tanakh_book_names as tbn
-import py.my_uxlc_location as my_uxlc_location
+import _repo_path_setup
+import py_misc.my_tanakh_book_names as tbn
+import py_misc.my_uxlc_location as my_uxlc_location
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
@@ -80,12 +81,14 @@ def main():
     """
     Estimate the concrete location of the given word.
 
-    Usage: python main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
-    Example: python main_uxlc_estimate_atom_loc.py Genes 27:7 "וַיָּבֵא"
+    Usage: .venv\Scripts\python.exe py\main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
+    Example: .venv\Scripts\python.exe py\main_uxlc_estimate_atom_loc.py Genes 27:7 "וַיָּבֵא"
     """
     args = sys.argv[1:]
     if len(args) != 3:
-        print("Usage: python main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>")
+        print(
+            "Usage: .venv\\Scripts\\python.exe py\\main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>"
+        )
         print('Example: ... Genes 27:7 "וַיָּבֵא"')
         sys.exit(1)
 

@@ -1,12 +1,12 @@
 """Exports prep, estimate, page_and_guesses."""
 
-import py.my_uxlc_cvp as cvp
-import py.my_uxlc_lci_augrec as lci_augrec
-import py.my_uxlc_lci_rec as lci_rec
-import py.my_uxlc_bibdist as bibdist
-import py.my_uxlc_page_break_info as page_break_info
-import py.my_tanakh_book_names as tbn
-import py.my_uxlc as my_uxlc
+import py_misc.my_uxlc_cvp as cvp
+import py_misc.my_uxlc_lci_augrec as lci_augrec
+import py_misc.my_uxlc_lci_rec as lci_rec
+import py_misc.my_uxlc_bibdist as bibdist
+import py_misc.my_uxlc_page_break_info as page_break_info
+import py_misc.my_tanakh_book_names as tbn
+import py_misc.my_uxlc as my_uxlc
 
 
 def prep():
