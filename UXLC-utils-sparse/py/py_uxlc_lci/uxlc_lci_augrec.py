@@ -2,7 +2,7 @@
 
 import py_uxlc_lci.uxlc_lci_rec as lci_rec
 import py_misc.my_uxlc_bibdist as bibdist
-import py_misc.my_uxlc_verlen as verlen
+import py_uxlc_lci.uxlc_lci_verlen as verlen
 import py_uxlc_lci.uxlc_lci_rec_flatten as lci_rec_flatten
 
 
