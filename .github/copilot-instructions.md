@@ -4,11 +4,11 @@
 ## Repository Purpose
 
 This repo is a public index of the Leningrad Codex. Its primary content is the
-`UXLC-utils-sparse/` subdirectory, which is a peer-copy of a selected subset of
-files from the sibling repo `UXLC-utils`. Either copy may be edited; there is no
-enforced upstream direction — when you edit a shared file in one repo, copy the
-change to the other. The canonical list of shared files is in
-`UXLC-utils-sparse/shared-with-UXLC-utils.md`.
+`UXLC-utils-sparse/` subdirectory, which is a sparse vendored copy of a selected
+subset of files from the sibling repo `UXLC-utils`. The source of truth is
+`../UXLC-utils`; update files there first, then resync this repo with
+`main_update_vendored_files.py`. The latest copied-path record is written to
+`UXLC-utils-sparse/provenance.md`.
 
 ## No Venv in This Repo
 
@@ -21,18 +21,19 @@ relative imports resolve correctly.
 ## Running the Atom-Location Script
 
 ```
-cd UXLC-utils-sparse && <path-to-python> main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
+cd UXLC-utils-sparse && <path-to-python> py/main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
 ```
 
 - **`book_id`** — UXLC book name, e.g. `Numbers`, `Genesis`, `Isaiah`.
 - **`c:v`** — chapter and verse, colon-separated (e.g. `20:26`).
 - **`word`** — the Hebrew word to find. Tries exact match first, then stripped.
 
-## Syncing Shared Files with UXLC-utils
+## Syncing Vendored Files from UXLC-utils
 
-After editing any file listed in `UXLC-utils-sparse/shared-with-UXLC-utils.md`,
-copy the change to the corresponding path in `../UXLC-utils/`. The two repos are
-peers — neither is authoritative.
+Edit canonical files in `../UXLC-utils/`, then run
+`main_update_vendored_files.py` from this repo root to refresh the vendored
+subset in `UXLC-utils-sparse/`. Do not treat `UXLC-utils-sparse/` as an
+independent peer copy.
 
 ## Multi-Line Content — Write to `.novc/` Files
 
