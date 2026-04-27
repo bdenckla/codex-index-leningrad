@@ -11,11 +11,11 @@ This script:
 """
 
 import datetime
-import importlib.util
 import shutil
 import sys
 from pathlib import Path
-from types import ModuleType
+
+import vendoring_sync
 
 _REPO = Path(__file__).resolve().parent
 _SOURCE_REPO = _REPO.parent / "UXLC-utils"
@@ -30,7 +30,7 @@ _LEGACY_DEST_DIRS = [
 ]
 
 
-def _sync_by_intersection(vendoring_sync: ModuleType) -> list[str]:
+def _sync_by_intersection() -> list[str]:
     """Copy existing local vendored files from the source repo."""
     return vendoring_sync.copy_by_intersection(
         _SOURCE_REPO,
@@ -56,23 +56,6 @@ def _remove_legacy_paths() -> list[str]:
     return removed
 
 
-def _load_vendoring_sync() -> ModuleType:
-    module_path = _REPO.parent / "MAM-basics" / "py" / "mb_cmn" / "vendoring_sync.py"
-    if not module_path.is_file():
-        raise FileNotFoundError(
-            f"Shared helper not found: {module_path}. "
-            "Expected in sibling MAM-basics repo."
-        )
-
-    spec = importlib.util.spec_from_file_location("mb_cmn_vendoring_sync", module_path)
-    if spec is None or spec.loader is None:
-        raise ImportError(f"Could not load module spec from {module_path}")
-
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
 def _reconfigure_stream_encoding(stream: object) -> None:
     reconfigure = getattr(stream, "reconfigure", None)
     if callable(reconfigure):
@@ -91,12 +74,10 @@ def main() -> None:
     if not _SPARSE_ROOT.is_dir():
         raise FileNotFoundError(f"Sparse vendored subtree not found at {_SPARSE_ROOT}")
 
-    vendoring_sync = _load_vendoring_sync()
-
     commit, tag = vendoring_sync.get_git_info(_SOURCE_REPO)
     date_str = datetime.date.today().isoformat()
 
-    synced_paths = _sync_by_intersection(vendoring_sync)
+    synced_paths = _sync_by_intersection()
     removed_paths = _remove_legacy_paths()
 
     vendoring_sync.write_provenance(
