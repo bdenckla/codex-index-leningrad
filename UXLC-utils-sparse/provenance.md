@@ -47,17 +47,23 @@ Files copied:
   in/UXLC-39/Zechariah.xml
   in/UXLC-39/Zephaniah.xml
   py/main_uxlc_estimate_atom_loc.py
-  py/py_misc/my_tanakh_book_names.py
-  py/py_misc/my_uxlc.py
-  py/py_misc/my_uxlc_bibdist.py
-  py/py_misc/my_uxlc_cvp.py
-  py/py_misc/my_uxlc_location.py
-  py/py_misc/my_uxlc_page_break_info.py
-  py/py_uxlc_lci/uxlc_lci_augrec.py
-  py/py_uxlc_lci/uxlc_lci_rec.py
-  py/py_uxlc_lci/uxlc_lci_rec_flatten.py
-  py/py_uxlc_lci/uxlc_lci_verlen.py
+  py/uxlc_lci/uxlc_lci_augrec.py
+  py/uxlc_lci/uxlc_lci_rec.py
+  py/uxlc_lci/uxlc_lci_rec_flatten.py
+  py/uxlc_lci/uxlc_lci_rec_to_xml.py
+  py/uxlc_lci/uxlc_lci_verlen.py
+  py/uxlc_misc/my_dd_lett_words.py
+  py/uxlc_misc/my_dd_simplify_simple_diffs.py
+  py/uxlc_misc/my_unicode.py
+  py/uxlc_misc/my_uxlc.py
+  py/uxlc_misc/my_uxlc_bibdist.py
+  py/uxlc_misc/my_uxlc_book_abbreviations.py
+  py/uxlc_misc/my_uxlc_changes.py
+  py/uxlc_misc/my_uxlc_cvp.py
+  py/uxlc_misc/my_uxlc_location.py
+  py/uxlc_misc/my_uxlc_page_break_info.py
+  py/uxlc_misc/uxlc_utils_html.py
 
-Git commit: 80fb83b58db55be002b4f1426b2e3921745ccc19
+Git commit: bc90c556cf279f0509d31cdb61435f468b2f7c8e
 
-Date copied: 2026-04-27
+Date copied: 2026-05-07
