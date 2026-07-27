@@ -42,13 +42,16 @@ def _nexts(cvp):
     return ((cvp[0], cvp[1], cvp[2] + 1), (cvp[0], cvp[1] + 1, 1), (cvp[0] + 1, 1, 1))
 
 
-def _sta_cvp(row): return _get_cvp(row, "startrec")
+def _sta_cvp(row):
+    return _get_cvp(row, "startrec")
 
 
-def _sto_cvp(row): return _get_cvp(row, "stoprec")
+def _sto_cvp(row):
+    return _get_cvp(row, "stoprec")
 
 
-def _set_sto(row1, row2): return {**row1, "stoprec": row2["stoprec"]}
+def _set_sto(row1, row2):
+    return {**row1, "stoprec": row2["stoprec"]}
 
 
 def _get_cvp(row, stxkey):  # stxkey: "startrec" or "stoprec"

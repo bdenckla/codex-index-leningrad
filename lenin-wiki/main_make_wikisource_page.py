@@ -1,4 +1,4 @@
-""" Exports main """
+"""Exports main"""
 
 from py.read_json_file import read_json_file
 from py.s1_collapse_rows import s1_collapse_rows

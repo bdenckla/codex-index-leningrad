@@ -19,7 +19,7 @@ def _line_for_page(page_ddda):
 def _vis_for_page(page_ddda):
     ddda_ddd, ddda_a = page_ddda[:3], page_ddda[3]
     ddd_int = int(ddda_ddd)
-    n_mafi = ddd_int - 462 
+    n_mafi = ddd_int - 462
     dd_mafi = f"{n_mafi:02}"  # E.g. "03" if n_mafi == 3
     hahb = iu.CACB_HAHB[ddda_a]
     visible = f"מסורה סופית {dd_mafi} ({hahb})"

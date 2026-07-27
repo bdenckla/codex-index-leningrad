@@ -1,4 +1,4 @@
-""" Exports ? """
+"""Exports ?"""
 
 from enum import Enum
 import py.my_locales as tbn
