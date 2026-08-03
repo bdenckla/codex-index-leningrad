@@ -7,10 +7,16 @@ Run from repo root:
 This script:
     1. Copies the designated sparse subset from ../UXLC-utils into UXLC-utils-sparse.
   2. Removes the legacy UXLC-utils-sparse/in/UXLC directory if present.
-  3. Writes UXLC-utils-sparse/provenance.md with source git metadata and copied paths.
+  3. Writes UXLC-utils-sparse/provenance.md with source git metadata and copied paths --
+     but only when step 1 or step 2 actually changed something, or --force-provenance is
+     given.  provenance.md stamps the source repo's HEAD and today's date, so writing it
+     unconditionally left the file dirty after any UXLC-utils commit and after any re-run
+     on a later day, with not one vendored byte moved.
 """
 
+import argparse
 import datetime
+import hashlib
 import shutil
 import sys
 from pathlib import Path
@@ -30,9 +36,24 @@ _LEGACY_DEST_DIRS = [
 ]
 
 
-def _sync_by_intersection() -> list[str]:
-    """Copy existing local vendored files from the source repo."""
-    return vendoring_sync.copy_by_intersection(
+def _parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--force-provenance",
+        action="store_true",
+        help=(
+            "Rewrite provenance.md even when no vendored file content changed and no "
+            "legacy path was removed. By default provenance.md is left untouched (no "
+            "date/commit bump) when the sync copied no new content."
+        ),
+    )
+    return parser.parse_args()
+
+
+def _sync() -> tuple[list[str], bool]:
+    """Copy existing local vendored files, returning (copied_files, content_changed)."""
+    before = _content_digest(_SPARSE_ROOT)
+    copied = vendoring_sync.copy_by_intersection(
         _SOURCE_REPO,
         _SPARSE_ROOT,
         include_suffixes=None,
@@ -40,6 +61,31 @@ def _sync_by_intersection() -> list[str]:
         recursive=True,
         exclude_rel_paths=[rel_path.as_posix() for rel_path in _LOCAL_ONLY_PATHS],
     )
+    changed = _content_digest(_SPARSE_ROOT) != before
+    return copied, changed
+
+
+def _content_digest(dest_dir: Path) -> dict[str, str]:
+    """Map each vendored path under dest_dir to a hash of its bytes.
+
+    Recursive and suffix-blind, because the sync it has to mirror is: the
+    copy_by_intersection call above runs with recursive=True and
+    include_suffixes=None over data/ and in/UXLC-39/. The sibling instances of
+    this idiom (MAM-basics' main_wlc_vendor_uxlc.py, and UXLC-utils' own copy
+    before it was deleted) both walk one flat directory and filter to one suffix;
+    either of those here would see no files at all and so report "unchanged"
+    forever. provenance.md is skipped because it is the file being decided about.
+    """
+    excluded = {rel_path.as_posix() for rel_path in _LOCAL_ONLY_PATHS}
+    digest: dict[str, str] = {}
+    for path in dest_dir.rglob("*"):
+        if not path.is_file() or "__pycache__" in path.parts:
+            continue
+        rel_posix = path.relative_to(dest_dir).as_posix()
+        if rel_posix in excluded:
+            continue
+        digest[rel_posix] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return digest
 
 
 def _remove_legacy_paths() -> list[str]:
@@ -56,6 +102,43 @@ def _remove_legacy_paths() -> list[str]:
     return removed
 
 
+def _maybe_write_provenance(
+    dest_dir: Path,
+    *,
+    source_rel: str,
+    copied_files: list[str],
+    commit: str,
+    tag: str | None,
+    date_str: str,
+    title: str,
+    removed_paths: list[str],
+    changed: bool,
+    force: bool,
+) -> bool:
+    """Write provenance.md only when something changed (or force). Return whether written."""
+    if not (changed or force):
+        return False
+    vendoring_sync.write_provenance(
+        dest_dir,
+        source_rel=source_rel,
+        copied_files=copied_files,
+        commit=commit,
+        tag=tag,
+        date_str=date_str,
+        title=title,
+        removed_paths=removed_paths,
+    )
+    return True
+
+
+def _report(dest_dir: Path, copied: list[str], changed: bool, wrote: bool) -> None:
+    if wrote:
+        provenance = "provenance updated" if changed else "provenance forced"
+    else:
+        provenance = "unchanged, provenance kept"
+    print(f"{dest_dir.relative_to(_REPO)}: synced {len(copied)} files ({provenance})")
+
+
 def _reconfigure_stream_encoding(stream: object) -> None:
     reconfigure = getattr(stream, "reconfigure", None)
     if callable(reconfigure):
@@ -63,6 +146,7 @@ def _reconfigure_stream_encoding(stream: object) -> None:
 
 
 def main() -> None:
+    args = _parse_args()
     _reconfigure_stream_encoding(sys.stdout)
     _reconfigure_stream_encoding(sys.stderr)
 
@@ -77,10 +161,13 @@ def main() -> None:
     commit, tag = vendoring_sync.get_git_info(_SOURCE_REPO)
     date_str = datetime.date.today().isoformat()
 
-    synced_paths = _sync_by_intersection()
+    synced_paths, content_changed = _sync()
     removed_paths = _remove_legacy_paths()
+    # A legacy removal is recorded in provenance.md's own "Legacy paths removed:"
+    # section, so it is as much a reason to rewrite the file as a copied byte is.
+    changed = content_changed or bool(removed_paths)
 
-    vendoring_sync.write_provenance(
+    wrote = _maybe_write_provenance(
         _SPARSE_ROOT,
         source_rel="UXLC-utils",
         copied_files=synced_paths,
@@ -89,9 +176,11 @@ def main() -> None:
         date_str=date_str,
         title="Provenance of UXLC-utils-sparse",
         removed_paths=removed_paths,
+        changed=changed,
+        force=args.force_provenance,
     )
 
-    print(f"Synced {len(synced_paths)} files")
+    _report(_SPARSE_ROOT, synced_paths, changed, wrote)
     if removed_paths:
         print(f"Removed {len(removed_paths)} legacy paths")
     print(f"UXLC-utils commit: {commit}")
