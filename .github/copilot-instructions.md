@@ -10,30 +10,43 @@ subset of files from the sibling repo `UXLC-utils`. The source of truth is
 `main_update_vendored_files.py`. The latest copied-path record is written to
 `UXLC-utils-sparse/provenance.md`.
 
-## No Venv in This Repo
+## `UXLC-utils-sparse/` Is Data Only — the Python Went to MAM-basics
 
-This repo has no `.venv/` of its own. The `main_uxlc_estimate_atom_loc.py` script
-has no dependencies beyond the standard library and can be run with **any**
-project venv available locally (e.g. `../../holman-ketiv-qere/.venv/Scripts/python.exe`).
-It must always be run from the `UXLC-utils-sparse/` directory so its `py.*`
-relative imports resolve correctly.
+The sparse copy holds `in/UXLC-39/*.xml` and `data/lci_*.json`, and nothing else.
+It once also carried seventeen of UXLC-utils' `.py` under `UXLC-utils-sparse/py/`;
+those were removed on 2026-08-03, when UXLC-utils' Python moved to `../MAM-basics`
+(see `../MAM-basics/doc/PLAN-evacuate-python-from-UXLC-utils.md`, Phase 5). Nothing
+in this repo ever imported them, and by the end they could not run here at all:
+they import `mb_cmn`, which the sparse copy never carried, so the one script among
+them raised `ModuleNotFoundError: No module named 'mb_cmn'`. Do not vendor them
+back.
 
-## Running the Atom-Location Script
+Their one entry point, the ad-hoc "where on the page is this atom" query, is now
+run from MAM-basics, which reads `../UXLC-utils` directly — the same corpus
+`UXLC-utils-sparse/in/UXLC-39/` mirrors:
 
 ```
-cd UXLC-utils-sparse && <path-to-python> py/main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
+C:\Users\BenDe\GitRepos\MAM-basics\.venv\Scripts\python.exe C:\Users\BenDe\GitRepos\MAM-basics\py\main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
 ```
 
 - **`book_id`** — UXLC book name, e.g. `Numbers`, `Genesis`, `Isaiah`.
 - **`c:v`** — chapter and verse, colon-separated (e.g. `20:26`).
 - **`word`** — the Hebrew word to find. Tries exact match first, then stripped.
 
+Of the two data files, only `data/lci_augrecs.json` has a reader here —
+`lenin-wiki/main_make_wikisource_page.py`. `data/lci_recs.json` and the 39 XML are
+kept as this repo's own snapshot of the corpus it indexes, not because a program
+here reads them.
+
 ## Syncing Vendored Files from UXLC-utils
 
-Edit canonical files in `../UXLC-utils/`, then run
-`main_update_vendored_files.py` from this repo root to refresh the vendored
+Regenerate the canonical files in `../UXLC-utils/` — which now means running
+`../MAM-basics/py/main_uxlc_mega.py`, since that repo holds the generators — then
+run `main_update_vendored_files.py` from this repo root to refresh the vendored
 subset in `UXLC-utils-sparse/`. Do not treat `UXLC-utils-sparse/` as an
-independent peer copy.
+independent peer copy. The script syncs by intersection with what is already
+present locally, so it covers exactly the `in/` and `data/` files listed in
+`UXLC-utils-sparse/provenance.md` and adds nothing.
 
 ## Multi-Line Content — Write to `.novc/` Files
 

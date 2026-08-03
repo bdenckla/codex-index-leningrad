@@ -17,9 +17,12 @@ Latin-script composition.
 Scope excludes:
   - UXLC-utils-sparse/ (an external/vendored subtree copied verbatim from the
     sibling UXLC-utils repo -- see UXLC-utils-sparse/provenance.md; it carries
-    both external Bible-text snapshots under in/UXLC-39/ and vendored py/ code,
-    none of it hand-authored to this repo. It self-corrects when its source
-    repo is standardized and re-vendored, so migrating it here is out of scope.)
+    external Bible-text snapshots under in/UXLC-39/ and two generated JSON under
+    data/, neither hand-authored to this repo. It self-corrects when its source
+    repo is standardized and re-vendored, so migrating it here is out of scope.
+    It carried vendored py/ code too until 2026-08-03, when that half was
+    dropped -- UXLC-utils' Python moved to ../MAM-basics and nothing here
+    imported it.)
   - binary files (by extension)
 
 Root is discovered via `git rev-parse --show-toplevel` and the test uses only
