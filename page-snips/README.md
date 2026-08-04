@@ -9,7 +9,12 @@ Images come from the two sets the wiki index links, which are the same photograp
 - <https://archive.org/details/Leningrad_Codex_Color_Images/page/n859/mode/1up?view=theater>
 
 `lenin-wiki/index.wiki` has both links for every folio, so it is the way to get from a folio
-number to an image.
+number to an image. <https://www.masoretica.org/> is the other way, and covers 187
+manuscripts rather than this one — `?book=Lamentations&chapter=2&verse=3&manuscript=leningrad`
+addresses a verse directly and answers with the page, the folio and the Internet Archive scan
+number.
+
+A snip of a manuscript with no repo of its own goes to `MAM-basics/doc/ms-snips/` instead.
 
 ## 430B-col2-line10-Lam2v3-akhla.png
 
@@ -28,6 +33,9 @@ Two further facts about the same verse, from `../UXLC-utils-sparse/in/UXLC-39/La
 rather than from the image: the verse has a meteg on בָּֽחֳרִי and another on לֶֽהָבָ֔ה, plus
 the silluq on the verse-final סָבִֽיב׃. So the absence on אָכְלָ֖ה sits among three marks
 present, not on a page sparing with them.
+
+Codex Sassoon 1053 has no meteg on this word either, confirmed the same day from its page
+740; that crop is at `MAM-basics/doc/ms-snips/sassoon1053-p740-Lam2v3-akhla.png`.
 
 ### Calibration note for the atom-location estimator
 
