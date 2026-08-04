@@ -34,8 +34,10 @@ rather than from the image: the verse has a meteg on בָּֽחֳרִי and anot
 the silluq on the verse-final סָבִֽיב׃. So the absence on אָכְלָ֖ה sits among three marks
 present, not on a page sparing with them.
 
-Codex Sassoon 1053 has no meteg on this word either, confirmed the same day from its page
-740; that crop is at `MAM-basics/doc/ms-snips/sassoon1053-p740-Lam2v3-akhla.png`.
+Codex Sassoon 1053 and Cambridge Add. 1753 have no meteg on this word either, both confirmed
+the same day: `MAM-basics/doc/ms-snips/sassoon1053-p740-Lam2v3-akhla.png` for Sassoon 1053
+page 740, and `codex-index-cam1753/page-snips/0105B-col2-Lam2v3-akhla.png` for Cambridge
+Add. 1753 leaf 0105B column 2.
 
 ### Calibration note for the atom-location estimator
 
