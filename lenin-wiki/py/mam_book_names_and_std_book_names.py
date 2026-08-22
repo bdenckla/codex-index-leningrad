@@ -25,6 +25,12 @@ def wikisource_book_path_fr_bk39id(bk39id):
     """
     Given bk39id, return the path to the corresponding JSON-format file
     downloaded from Wikisource.
+
+    NOT CALLED, and ``in/mam-ws/`` is not in this repo -- see the same note on
+    ``mam_book_names.mam_book_path``, which this function is the bk39id-keyed
+    twin of.  Left as it is by Phase 1 of
+    ``../MAM-basics/doc/PLAN-evacuate-python-from-codex-index-trio.md`` for the
+    same reason, and deleted with the module at Phase 3.
     """
     basename = tbn.ordered_short_dash_full_39(bk39id)
     return f"in/mam-ws/{basename}.json"

@@ -73,6 +73,14 @@ _BINARY_EXTENSIONS = {
 
 # The whole UXLC-utils-sparse/ subtree is external/vendored (provenance.md),
 # not hand-authored to this repo -- excluded from both scope and the guard.
+#
+# THIS IS NOT A PATH AND NOTHING BUILDS ONE FROM IT: it is a repo-relative prefix
+# matched with str.startswith against a path _iter_files has already produced,
+# and REPO_ROOT above comes from git rev-parse, so this module is cwd-independent
+# already. Left alone by Phase 1 of
+# ../MAM-basics/doc/PLAN-evacuate-python-from-codex-index-trio.md, which a grep
+# for '"UXLC-utils-sparse' sends here; rewriting it as a filesystem path would
+# be a bug.
 _EXCLUDE_DIR_PREFIXES = ("UXLC-utils-sparse/",)
 
 
