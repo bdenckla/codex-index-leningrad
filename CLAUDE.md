@@ -98,6 +98,7 @@ refresh above copies it, and UXLC-utils' own generators are what write the origi
 
 `py/tests/test_h_dot_below_nfc.py` here was deleted with the rest, but the check it ran did not
 go with it: MAM-basics' own copy carries a `codex-index-leningrad` scope, which walks this
-repo's tracked files with `UXLC-utils-sparse/` excluded. Nine files are in scope after the move.
+repo's tracked files with `UXLC-utils-sparse/` excluded. Eight files are in scope after the
+move, measured 2026-08-22 after the deletion.
 So a decomposed h-with-dot-below authored here is still caught — by a run of MAM-basics' suite,
 not by anything here.
