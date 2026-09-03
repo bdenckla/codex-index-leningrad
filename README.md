@@ -1,30 +1,9 @@
 # codex-index-leningrad
-Index of the Leningrad Codex
 
-**This repo holds data, and no code.** Its Python moved to the sibling repo
-MAM-basics on 2026-08-22, under Phase 3 of that repo's
-`doc/PLAN-evacuate-python-from-codex-index-trio.md`; the data stayed here and goes on
-being hosted here. Nothing about that is provisional. See CLAUDE.md for which program
-in MAM-basics writes what here.
+This repository was evacuated into
+[MAM-basics](https://github.com/bdenckla/MAM-basics) on 2026-09-03. Its former
+files are under MAM-basics' `leningrad/` prefix, and its index generator is
+`py/main_lenin_wikisource_page.py` there.
 
-The folder "UXLC-utils-sparse" is a temporary sparse vendor of selected canonical
-files from MAM-basics: `in/UXLC-39/`, `in/lci_recs.json`, and
-`uxlc/data/lci_augrecs.json`. The Phase 5 UXLC-utils evacuation repointed the
-vendor on 2026-09-03; the codex-index-leningrad evacuation remains a separate
-lane. See UXLC-utils-sparse/provenance.md for what it holds and where each file
-came from, and CLAUDE.md for how to resync it.
-
-It is data only — 39 XML under in/UXLC-39 and two JSON under data. Seventeen
-Python files sat under UXLC-utils-sparse/py until 2026-08-03; they went when the
-UXLC Python moved to MAM-basics, which now holds every UXLC generator and source
-data tree.
-
-The folder "lenin-wiki" holds the wikitext of the Wikisource page indexing this
-codex, and the two JSON the pipeline derives on the way to it. All three are
-generated, from UXLC-utils-sparse/data/lci_augrecs.json; CLAUDE.md gives the
-command.
-
-"page-snips" holds crops of Leningrad Codex page images, one per fact read off
-the manuscript, with page-snips/README.md recording what each one settles. See
-that file for how to get from a folio number to an image. Those crops are made by
-hand — no program writes them.
+The repository has no Pages site and no open issues. It remains as an archived,
+read-only history and issue-tracker record.
