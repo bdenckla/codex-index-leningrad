@@ -27,7 +27,7 @@ Run either from anywhere; both address this repo by absolute path, through
 program, from one input, `UXLC-utils-sparse/data/lci_augrecs.json`:
 
 ```powershell
-C:\Users\BenDe\GitRepos\MAM-basics\.venv\Scripts\python.exe C:\Users\BenDe\GitRepos\MAM-basics\py\main_lenin_wikisource_page.py
+C:/Users/BenDe/GitRepos/MAM-basics/.venv/Scripts/python.exe C:/Users/BenDe/GitRepos/MAM-basics/py/main_lenin_wikisource_page.py
 ```
 
 That was `lenin-wiki/main_make_wikisource_page.py` here until the move. The name changed because
@@ -47,7 +47,7 @@ steps run there.
 2. `../MAM-basics/py/main_lenin_vendor_uxlc.py` — refreshes the vendored subset here
 
 ```powershell
-C:\Users\BenDe\GitRepos\MAM-basics\.venv\Scripts\python.exe C:\Users\BenDe\GitRepos\MAM-basics\py\main_lenin_vendor_uxlc.py
+C:/Users/BenDe/GitRepos/MAM-basics/.venv/Scripts/python.exe C:/Users/BenDe/GitRepos/MAM-basics/py/main_lenin_vendor_uxlc.py
 ```
 
 That was this repo's root `main_update_vendored_files.py`, with a two-line fork of MAM-basics'
@@ -74,7 +74,7 @@ the ad-hoc "where on the page is this atom" query, is now run from MAM-basics, w
 `../UXLC-utils` directly — the same corpus `UXLC-utils-sparse/in/UXLC-39/` mirrors:
 
 ```powershell
-C:\Users\BenDe\GitRepos\MAM-basics\.venv\Scripts\python.exe C:\Users\BenDe\GitRepos\MAM-basics\py\main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
+C:/Users/BenDe/GitRepos/MAM-basics/.venv/Scripts/python.exe C:/Users/BenDe/GitRepos/MAM-basics/py/main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
 ```
 
 `book_id` is a UXLC book name (`Numbers`, `Genesis`, `Isaiah`); `c:v` is colon-separated; the
