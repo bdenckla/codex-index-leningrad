@@ -37,13 +37,14 @@ input formats.
 **Regenerating them is how a change is verified**: all three come back byte-identical unless
 something real has changed, which is what MAM-basics' Phase 3 used as its oracle.
 
-## `../UXLC-utils` is the source of truth — never edit `UXLC-utils-sparse/` directly
+## MAM-basics is the temporary sparse vendor's source — never edit `UXLC-utils-sparse/` directly
 
-To change anything under `UXLC-utils-sparse/`, regenerate it upstream and resync. The
-generators no longer live in UXLC-utils either: they moved to MAM-basics on 2026-08-03, so both
-steps run there.
+The Phase 5 UXLC-utils evacuation repointed the temporary vendor on 2026-09-03.
+The codex-index-leningrad evacuation remains a separate lane. To change anything
+under `UXLC-utils-sparse/`, regenerate MAM-basics' UXLC artifacts and refresh the
+vendor from its canonical inputs.
 
-1. `../MAM-basics/py/main_uxlc_mega.py` — regenerates the canonical files in `../UXLC-utils/`
+1. `../MAM-basics/py/main_uxlc_mega.py` — regenerates the UXLC artifacts in MAM-basics
 2. `../MAM-basics/py/main_lenin_vendor_uxlc.py` — refreshes the vendored subset here
 
 ```powershell
@@ -55,23 +56,23 @@ That was this repo's root `main_update_vendored_files.py`, with a two-line fork 
 `write_provenance` takes it as an argument now. `UXLC-utils-sparse/provenance.md` keeps its name
 — no leading underscore, unlike MAM-basics' own `_provenance.md` files.
 
-The sync works by intersection with what is already present locally, so it covers exactly the
-`in/` and `data/` files listed in `UXLC-utils-sparse/provenance.md` and adds nothing. That is
-also why it cannot be used to pull something new in.
+The sync preserves this tree's established shape: it copies the 39 XML files from
+MAM-basics' `in/UXLC-39/`, `lci_recs.json` from `in/lci_recs.json`, and
+`lci_augrecs.json` from `uxlc/data/`. The vendored paths are fixed; the command
+cannot add a new one.
 
-**As of 2026-08-22 the vendored copy is behind**: it was taken at UXLC-utils `748ee2f` on
-2026-08-03, and running the refresh moves `data/lci_augrecs.json` and `data/lci_recs.json`.
-Refreshing it therefore also moves the three files under `lenin-wiki/`, `lci_augrecs.json` being
-the pipeline's input — so it is a regeneration rather than a data update, and MAM-basics' Phase 3
-deliberately left it alone rather than mix the two in one diff.
+The 2026-09-03 refresh records the MAM-basics source commit in
+`UXLC-utils-sparse/provenance.md`. Refreshing `data/lci_augrecs.json` also
+regenerates the three files under `lenin-wiki/`, because that JSON is the
+pipeline's input.
 
 ## Do not vendor UXLC-utils' Python back in
 
 Seventeen `.py` sat under `UXLC-utils-sparse/py/` until 2026-08-03. Nothing here ever imported
 them, and by the end they could not run here at all: they import `mb_cmn`, which the sparse copy
 never carried, so the one script among them raised `ModuleNotFoundError`. Their one entry point,
-the ad-hoc "where on the page is this atom" query, is now run from MAM-basics, which reads
-`../UXLC-utils` directly — the same corpus `UXLC-utils-sparse/in/UXLC-39/` mirrors:
+the ad-hoc "where on the page is this atom" query, is now run from MAM-basics against the
+canonical `in/UXLC-39/` tree that `UXLC-utils-sparse/in/UXLC-39/` mirrors:
 
 ```powershell
 C:/Users/BenDe/GitRepos/MAM-basics/.venv/Scripts/python.exe C:/Users/BenDe/GitRepos/MAM-basics/py/main_uxlc_estimate_atom_loc.py <book_id> <c:v> <word>
@@ -92,7 +93,7 @@ show up as a failure here.
 Everything else this repo tracks is hand-made or vendored, and nothing regenerates it:
 `page-snips/` (one PNG crop and the README recording what it settles), `README.md`, this file,
 `.gitattributes` and `.gitignore`. `UXLC-utils-sparse/` is vendored rather than generated — the
-refresh above copies it, and UXLC-utils' own generators are what write the originals.
+refresh above copies it, and MAM-basics' UXLC generators write the canonical files.
 
 ## MAM-basics still lints this repo, and still scans it for NFC
 

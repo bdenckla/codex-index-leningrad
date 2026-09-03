@@ -19162,8 +19162,8 @@
     },
     {
       "startrec": {
-        "colnu": null,
-        "linenu": null,
+        "colnu": 1,
+        "linenu": 1,
         "chnu": 1,
         "vrnu": 1,
         "wordnu": 1,
@@ -19171,8 +19171,8 @@
         "max_wordnu": 15
       },
       "stoprec": {
-        "colnu": null,
-        "linenu": null,
+        "colnu": 3,
+        "linenu": 27,
         "chnu": 1,
         "vrnu": 21,
         "wordnu": 2,
@@ -19576,8 +19576,8 @@
     },
     {
       "startrec": {
-        "colnu": null,
-        "linenu": null,
+        "colnu": 1,
+        "linenu": 1,
         "chnu": 31,
         "vrnu": 35,
         "wordnu": 8,
@@ -19585,8 +19585,77 @@
         "max_wordnu": 13
       },
       "stoprec": {
-        "colnu": null,
-        "linenu": null,
+        "colnu": 1,
+        "linenu": 10,
+        "chnu": 32,
+        "vrnu": 1,
+        "wordnu": 11,
+        "word_count": 56,
+        "max_wordnu": 11
+      },
+      "page": "406A",
+      "bkid": "Job",
+      "note": null
+    },
+    {
+      "startrec": {
+        "colnu": 1,
+        "linenu": 12,
+        "chnu": 32,
+        "vrnu": 2,
+        "wordnu": 1,
+        "word_count": 56,
+        "max_wordnu": 15
+      },
+      "stoprec": {
+        "colnu": 1,
+        "linenu": 19,
+        "chnu": 32,
+        "vrnu": 5,
+        "wordnu": 10,
+        "word_count": 103,
+        "max_wordnu": 10
+      },
+      "page": "406A",
+      "bkid": "Job",
+      "note": null
+    },
+    {
+      "startrec": {
+        "colnu": 1,
+        "linenu": 21,
+        "chnu": 32,
+        "vrnu": 6,
+        "wordnu": 1,
+        "word_count": 103,
+        "max_wordnu": 18
+      },
+      "stoprec": {
+        "colnu": 1,
+        "linenu": 27,
+        "chnu": 32,
+        "vrnu": 10,
+        "wordnu": 5,
+        "word_count": 146,
+        "max_wordnu": 8
+      },
+      "page": "406A",
+      "bkid": "Job",
+      "note": null
+    },
+    {
+      "startrec": {
+        "colnu": 2,
+        "linenu": 1,
+        "chnu": 32,
+        "vrnu": 10,
+        "wordnu": 6,
+        "word_count": 146,
+        "max_wordnu": 8
+      },
+      "stoprec": {
+        "colnu": 2,
+        "linenu": 27,
         "chnu": 33,
         "vrnu": 11,
         "wordnu": 2,

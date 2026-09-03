@@ -2,7 +2,7 @@ Provenance of UXLC-utils-sparse
 
 These files were copied from a sibling source repository at:
 
-  GitRepos-relative path: UXLC-utils
+  GitRepos-relative path: MAM-basics (in/UXLC-39, in/lci_recs.json and uxlc/data)
 
 Files copied:
   data/lci_augrecs.json
@@ -47,6 +47,6 @@ Files copied:
   in/UXLC-39/Zechariah.xml
   in/UXLC-39/Zephaniah.xml
 
-Git commit: 748ee2fee5536722b2323b22e71a879f597cf1c0
+Git commit: 5cfc6d4e03229649e011a7f33f8cb6a2f47dfe02
 
-Date copied: 2026-08-03
+Date copied: 2026-09-03

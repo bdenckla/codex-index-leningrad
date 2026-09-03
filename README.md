@@ -7,15 +7,17 @@ MAM-basics on 2026-08-22, under Phase 3 of that repo's
 being hosted here. Nothing about that is provisional. See CLAUDE.md for which program
 in MAM-basics writes what here.
 
-The folder "UXLC-utils-sparse" is a sparse vendored copy of selected files from
-the sibling repo "UXLC-utils", which is the canonical source. See
-UXLC-utils-sparse/provenance.md for what it holds and where each file came from,
-and CLAUDE.md for how to resync it.
+The folder "UXLC-utils-sparse" is a temporary sparse vendor of selected canonical
+files from MAM-basics: `in/UXLC-39/`, `in/lci_recs.json`, and
+`uxlc/data/lci_augrecs.json`. The Phase 5 UXLC-utils evacuation repointed the
+vendor on 2026-09-03; the codex-index-leningrad evacuation remains a separate
+lane. See UXLC-utils-sparse/provenance.md for what it holds and where each file
+came from, and CLAUDE.md for how to resync it.
 
-It is data only — 39 XML under in/UXLC-39 and two JSON under data. Seventeen of
-UXLC-utils' .py sat under UXLC-utils-sparse/py until 2026-08-03; they went when
-UXLC-utils' Python moved to MAM-basics, which is now where the
-generators of everything under UXLC-utils' in/, out/, gh-pages/ and data/ live.
+It is data only — 39 XML under in/UXLC-39 and two JSON under data. Seventeen
+Python files sat under UXLC-utils-sparse/py until 2026-08-03; they went when the
+UXLC Python moved to MAM-basics, which now holds every UXLC generator and source
+data tree.
 
 The folder "lenin-wiki" holds the wikitext of the Wikisource page indexing this
 codex, and the two JSON the pipeline derives on the way to it. All three are
